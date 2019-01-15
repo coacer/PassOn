@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="form-wrapper">
+    <%= form_for @user do |f| %>
+      <%= f.text_field :nickname, autofocus: true, placeholder: 'ニックネーム', class: 'form-factor' %><br>
+      <%= f.text_area :profile, placeholder: '自己紹介文', class: 'form-factor' %><br>
+      <%= attachment_image_tag @user, :user_image, :fill, 100, 100, class: 'form-factor', fallback: 'no_image.jpg' %><br>
+      <%= f.attachment_field :user_image, placeholder: 'プロフィール画像', class: 'form-factor' %><br>
+      <%= f.submit '保存' %>
+    <% end %>
+  </div>
+</div>

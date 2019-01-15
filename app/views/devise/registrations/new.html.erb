@@ -1,0 +1,54 @@
+<!-- <h2>Sign up</h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= devise_error_messages! %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Sign up" %>
+  </div>
+<% end %>
+
+<%= render "devise/shared/links" %> -->
+
+<div class="container">
+  <div class="form-wrapper">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+      <!-- <label for="name" class="form-factor">名前<span class="essential-mark"> *</span></label><br> -->
+      <!-- <input type="text" id="name" class="form-factor"><br> -->
+      <%= f.text_field :name, autofocus: true, placeholder: '名前', class: 'form-factor' %><span class="essential-mark"> *</span><br>
+      <!-- <label for="nickname" class="form-factor">ニックネーム<span class="essential-mark"> *</span></label><br>
+      <input type="text" id="nickname" class="form-factor"><br> -->
+      <%= f.text_field :nickname, placeholder: 'ニックネーム', class: 'form-factor' %><span class="essential-mark"> *</span><br>
+      <!-- <label for="email" class="form-factor">メールアドレス<span class="essential-mark"> *</span></label><br>
+      <input type="email" id="email" class="form-factor"><br> -->
+      <%= f.email_field :email, placeholder: 'メールアドレス', class: 'form-factor' %><span class="essential-mark"> *</span><br>
+      <!-- <label for="password" class="form-factor">パスワード<span class="essential-mark"> *</span></label><br>
+      <input type="password" class="form-factor"><br> -->
+      <%= f.password_field :password, placeholder: 'パスワード', class: 'form-factor' %><span class="essential-mark"> *</span><br>
+      <!-- <label for="password_confirmation" class="form-factor">パスワード確認<span class="essential-mark"> *</span></label><br>
+      <input type="password" id="password_confirmation" class="form-factor"> -->
+      <%= f.password_field :password_confirmation, placeholder: 'パスワード確認', class: 'form-factor' %><span class="essential-mark"> *</span><br>
+      <!-- <input type="submit" value="アカウントを作成" class="btn btn-success btn-lg form-factor submit"> -->
+      <%= f.submit 'アカウントを作成', class: 'btn btn-success btn-lg form-factor submit' %>
+    <% end %>
+  </div>
+</div>

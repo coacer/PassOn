@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="post-form">
+    <%= form_for @post do |f| %>
+    <% if @post.errors.messages[:title].any? %>
+      <p class="error"><%= @post.errors.messages[:title][0] %></p>
+    <% end %>
+      <%= f.text_field :title, class: 'form-factor', placeholder: 'タイトル' %><br>
+    <% if @post.errors.messages[:body].any? %>
+      <p class="error"><%= @post.errors.messages[:body][0] %></p>
+    <% end %>
+      <%= f.text_area :body, class: 'form-factor textarea', placeholder: '本文' %><br>
+      <!-- 画像フォーム挿入 -->
+      <%= f.attachment_field :image, class: 'form-factor' %><br>
+      <%= f.submit "投稿" %>
+    <% end %>
+  </div>
+</div>

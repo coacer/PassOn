@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="post-wrapper">
+    <%= attachment_image_tag @post.user, :user_image, :fill, 100, 100, class: 'user-image', fallback: 'no_image.jpg' %>
+    <%= link_to @post.user.nickname, user_path(@post.user), class: 'user-name' %>
+    <a href="#" class="post-title"><%= @post.title %></a>
+    <%= attachment_image_tag @post, :image, :fill, 600, 350, class: 'post-image' %>
+    <p class="post-body"><%= @post.body %></p>
+    <div class="favorite-action">
+      <% if @post.liked_by?(current_user) %>
+        <%= link_to post_likes_path(@post), method: :delete, class: 'like-btn' do %>
+          <span class="glyphicon glyphicon-heart liked-heart" aria-hidden="true"></span><%= @post.likes.count %> いいね
+        <% end %>
+      <% else %>
+        <%= link_to post_likes_path(@post), method: :post, class: 'like-btn' do %>
+          <span class="glyphicon glyphicon-heart unliked-heart" aria-hidden="true"></span><%= @post.likes.count %> いいね
+        <% end %>
+      <% end %>
+      <%= link_to post_path(@post) do %>
+        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span><%= @post.post_comments.count %>件 コメント
+      <% end %>
+    </div>
+    <div class="edit-action">
+    <% if @post.user == current_user %>
+      <%= link_to '編集', edit_post_path(@post) %>
+      <%= link_to '削除', post_path(@post), method: :delete, "data-confirm" => '投稿を削除してもよろしいですか？' %>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="post-form">
+    <%= form_for [@post, @post_comment] do |f| %>
+      <% if @post_comment.errors.any? %>
+        <p class="error"><%= @post_comment.errors.messages[:comment][0] %></p>
+      <% end %>
+      <%= f.text_area :comment, placeholder: 'コメントをここに', class: 'form-factor textarea' %><br>
+      <%= f.submit 'コメントをする' %>
+    <% end %>
+  </div>
+
+  <% @post_comments.each do |post_comment| %>
+  <div class="comment-wrapper">
+    <%= attachment_image_tag post_comment.user, :user_image, :fill, 100, 100, class: 'user-image', fallback: 'no_image.jpg' %>
+    <%= link_to post_comment.user.nickname, user_path(post_comment.user), class: 'user-name' %>
+    <p class="comment-content"><%= post_comment.comment %></p>
+    <div class="edit-action">
+      <% if current_user == post_comment.user %>
+        <%= link_to '削除', post_post_comment_path(@post, post_comment), method: :delete, class: 'destroy-link' %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+</div>
